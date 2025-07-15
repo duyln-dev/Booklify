@@ -1,0 +1,41 @@
+.search {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 20px;
+  margin-right: 40px;
+}
+
+@media (max-width: 768px) {
+  .search {
+    flex-direction: column; // Đặt các trường tìm kiếm theo chiều dọc
+    align-items: flex-start; // Căn trái
+  }
+
+  .search .name {
+    width: 100%; // Đặt chiều rộng của các trường tìm kiếm
+    margin-bottom: 10px; // Thêm khoảng cách giữa các trường
+  }
+
+  .button {
+    flex-direction: column; // Đặt các nút theo chiều dọc
+    align-items: flex-start; // Căn trái
+    margin-right: 0; // Đặt lại margin
+  }
+
+  .button button {
+    width: 100%; // Đặt chiều rộng của các nút
+    margin-bottom: 10px; // Thêm khoảng cách giữa các nút
+  }
+
+  .ant-table {
+    font-size: 12px; // Giảm kích thước font cho bảng
+  }
+}

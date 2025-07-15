@@ -1,0 +1,107 @@
+* {
+  outline: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.sidebar {
+  color: #fff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 10px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background: rgba(28, 17, 41, 0.88);
+}
+
+.menu-bar {
+  height: 88vh;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 1rem;
+  position: relative;
+}
+
+.toggle-theme-btn {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.toggle {
+  margin-left: 15px;
+}
+
+.admin-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.ant-dropdown-menu a {
+  text-decoration: none;
+}
+
+.ant-dropdown-menu a:hover {
+  text-decoration: none;
+}
+
+.account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &:hover {
+      color: #1677ff; // Màu bạn muốn khi hover
+      text-decoration: none;
+    }
+  }
+}
+
+.menu-bar .ant-menu-submenu .ant-menu-item a {
+  text-decoration: none !important; /* Loại bỏ gạch chân mặc định */
+}
+
+.menu-bar .ant-menu-submenu .ant-menu-item a:hover {
+  text-decoration: none !important; /* Loại bỏ gạch chân khi hover */
+}
+
+.menu-bar a {
+  text-decoration: none !important;
+  color: inherit; // giữ màu gốc theo theme
+}
+
+.menu-bar a:hover {
+  text-decoration: none !important;
+  color: #1677ff; // màu khi hover (tùy bạn chỉnh)
+}

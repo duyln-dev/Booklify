@@ -1,0 +1,54 @@
+.step-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+
+  .step-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex: 1;
+
+    .circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      color: #ccc;
+
+      &.done {
+        color: #0d6efd;
+        border-color: #0d6efd;
+        background-color: #fff;
+      }
+    }
+
+    .label {
+      margin-left: 6px;
+      font-size: 14px;
+      color: #888;
+
+      &.done {
+        color: #0d6efd;
+      }
+    }
+
+    .line {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background-color: #ccc;
+      margin: 0 8px;
+
+      &.done {
+        background-color: #0d6efd;
+      }
+    }
+  }
+}
