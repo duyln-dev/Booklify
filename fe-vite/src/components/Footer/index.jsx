@@ -9,7 +9,7 @@ const Footer = () => {
           <Col md={4} className="mb-3">
             <h5 className="fw-bold mb-2">
               <FaReact color="#61dbfb" className="me-2 spin-icon" />
-              BookStore
+              Booklify
             </h5>
             <p className="text-muted small">
               Nơi cung cấp sách hay, chất lượng và truyền cảm hứng cho bạn mỗi

@@ -1,5 +1,5 @@
 // React & hooks
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // React Router
 import { useNavigate } from "react-router";
@@ -19,6 +19,7 @@ import {
   Empty,
   Dropdown,
   Space,
+  Button,
 } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
@@ -34,7 +35,28 @@ import { callLogout } from "../../services/api";
 // Styles
 import "./header.scss";
 
+export const useCanHover = () => {
+  const [canHover, setCanHover] = useState(true);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(hover: hover)");
+
+    const handler = (e) => {
+      setCanHover(e.matches); // e.matches: true nếu hover được, false nếu không
+    };
+
+    setCanHover(mql.matches); // set ngay lần đầu
+    mql.addEventListener("change", handler); // hỗ trợ modern browser
+
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  return canHover;
+};
+
 const Header = () => {
+  const canHover = useCanHover();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
@@ -83,6 +105,49 @@ const Header = () => {
     });
   }
 
+  const contentPopover = () => {
+    return (
+      <div className="pop-cart-body">
+        <div className="pop-cart-content">
+          {carts?.map((book, index) => {
+            return (
+              <div className="book" key={`book-${index}`}>
+                <img
+                  className="book-thumbnail"
+                  src={`${import.meta.env.VITE_BACKEND_URL}/images/book/${
+                    book?.detail?.thumbnail
+                  }`}
+                />
+                <div className="book-info">
+                  <div className="book-info-name">{book?.detail?.mainText}</div>
+                  <div className="price">
+                    {new Intl.NumberFormat("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    }).format(book?.detail?.price ?? 0)}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {carts.length > 0 ? (
+          <div className="pop-cart-footer">
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={() => navigate("/order")}
+            >
+              Xem giỏ hàng
+            </Button>
+          </div>
+        ) : (
+          <Empty description="Không có sản phẩm trong giỏ hàng" />
+        )}
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="header">
@@ -113,8 +178,16 @@ const Header = () => {
         </div>
 
         <div className="header-cart">
-          <Popover title="Giỏ hàng">
-            <Badge count={3} showZero>
+          <Popover
+            title={"Sản phẩm mới thêm"}
+            className="popover-carts"
+            placement="topRight"
+            rootClassName="popover-carts"
+            content={contentPopover}
+            arrow={true}
+            trigger={canHover ? "hover" : "click"}
+          >
+            <Badge count={carts?.length ?? 0} showZero>
               <FiShoppingCart className="icon-cart" />
             </Badge>
           </Popover>

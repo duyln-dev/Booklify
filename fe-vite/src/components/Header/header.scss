@@ -82,4 +82,41 @@
       margin-left: 6%;
     }
   }
+
+  @media (max-width: 370px) {
+    .header-toogle {
+      display: inline-block;
+      margin-right: 90%;
+      font-size: 1.6rem;
+    }
+    .header__logo-text,
+    .header__logo-icon,
+    .header-user {
+      display: none;
+    }
+
+    .header-cart {
+      display: flex;
+      justify-content: center;
+      margin-left: 9%;
+    }
+  }
+}
+
+.pop-cart-body {
+  width: 300px; // hoặc 100%, tuỳ bạn mong muốn
+
+  .book {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    .book-thumbnail {
+      height: auto;
+      width: 55px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
 }
