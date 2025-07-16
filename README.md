@@ -8,7 +8,7 @@ A full-stack **book store management application** built using the MERN stack (M
 
 ## 🚀 Live Demo
 
-- **Deploy**: **[https://bookly-frontend-duydev.vercel.app](https://bookly-frontend-duydev.vercel.app)**
+- **Deploy**: **[https://booklify-duyln-dev.vercel.app/](https://booklify-duyln-dev.vercel.app/)**
 - **GitHub Repository**: **[https://github.com/duyln-dev/Booklify](https://github.com/duyln-dev/Booklify)**
 
 ---
@@ -68,29 +68,30 @@ A full-stack **book store management application** built using the MERN stack (M
 
 ## 🗂️ Folder Structure (Frontend)
 
+```plaintext
 src/
-├── assets/  
-├── components/  
-│ ├── Admin/
-│ ├── Book/
-│ ├── Footer/
-│ ├── Header/
-│ ├── Home/
-│ ├── Loading/
-│ ├── NotFound/
-│ ├── Order/
-│ └── ProtectedRoute/
-├── pages/  
-│ ├── admin/
-│ ├── book/
-│ ├── contact/
-│ ├── login/
-│ └── register/
-├── redux/  
-├── services/  
-├── styles/  
-├── utils/  
-├── App.jsx  
+├── assets/
+├── components/
+│   ├── Admin/
+│   ├── Book/
+│   ├── Footer/
+│   ├── Header/
+│   ├── Home/
+│   ├── Loading/
+│   ├── NotFound/
+│   ├── Order/
+│   └── ProtectedRoute/
+├── pages/
+│   ├── admin/
+│   ├── book/
+│   ├── contact/
+│   ├── login/
+│   └── register/
+├── redux/
+├── services/
+├── styles/
+├── utils/
+├── App.jsx
 └── main.jsx
 
 ## 🔒 Security
@@ -136,3 +137,4 @@ This project helped reinforce the following:
 ## 💬 Feedback
 
 This project is open for feedback and improvements. Contributions or suggestions are welcome through GitHub issues or pull requests.
+```
