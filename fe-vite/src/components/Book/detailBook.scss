@@ -1,0 +1,182 @@
+.detail {
+  width: 90%;
+  margin: 20px auto 0;
+  min-height: 100vh;
+
+  .detail-book {
+    margin-top: 3%;
+    display: flex;
+
+    .detail-book__img {
+      width: 40%;
+
+      .image-gallery-image {
+        width: 450px;
+      }
+    }
+
+    .detail-book_info {
+      width: 50%;
+      margin-left: 10%;
+
+      h4 {
+        font-size: 30px;
+      }
+
+      .author {
+        font-size: 20px;
+        margin-bottom: 4%;
+      }
+
+      h5 {
+        color: red;
+        margin-bottom: 4%;
+      }
+
+      .sold {
+        margin-bottom: 4%;
+      }
+
+      h6 {
+        margin-bottom: 4%;
+      }
+
+      .count {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 4%;
+
+        .quantity {
+          margin-right: 2%;
+        }
+
+        input {
+          width: 70px;
+          height: 32px;
+          border-left: 0;
+          border-right: 0;
+          font-size: 16px;
+          font-weight: 400;
+          box-sizing: border-box;
+          text-align: center;
+          cursor: text;
+          border-radius: 0;
+          border: 1px solid rgba(0, 0, 0, 0.09);
+          outline: none;
+        }
+
+        button {
+          outline: none;
+          cursor: pointer;
+          border: 0;
+          font-size: 0.875rem;
+          font-weight: 300;
+          line-height: 1;
+          letter-spacing: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 0.1s cubic-bezier(0.4, 0, 0.6, 1);
+          border: 1px solid rgba(0, 0, 0, 0.09);
+          border-radius: 2px;
+          background: transparent;
+          color: rgba(0, 0, 0, 0.8);
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      .addToCart {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: linear-gradient(
+          135deg,
+          #d0eaff,
+          #a2d4ff
+        ); // xanh dương nhạt
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #005b99;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        svg {
+          font-size: 18px;
+        }
+
+        &:hover {
+          background: linear-gradient(
+            135deg,
+            #a2d4ff,
+            #7fc9ff
+          ); // hover đậm hơn một chút
+          box-shadow: 0 4px 8px rgba(0, 91, 153, 0.2);
+          transform: translateY(-1px);
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .detail-book {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 24px;
+
+      .detail-book__img {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+
+        .image-gallery-image {
+          height: auto;
+          max-height: 300px;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .detail-book_info {
+        width: 100%;
+        max-width: 90%;
+        margin-top: 32px;
+        padding: 0 16px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .detail-book__img .image-gallery-image {
+      max-height: 220px;
+    }
+
+    .detail-book_info {
+      margin-top: 24px;
+      padding: 0 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .detail-book_info {
+      font-size: 14px;
+
+      h4,
+      h5 {
+        font-size: 16px;
+      }
+    }
+  }
+}

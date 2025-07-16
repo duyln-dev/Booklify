@@ -1,4 +1,4 @@
-import { Breadcrumb } from "react-bootstrap";
+import { Breadcrumb } from "antd";
 import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -11,6 +11,10 @@ import { callGetDetailBook } from "../../services/api";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { doAddBookAction } from "../../redux/order/orderSlice";
+import BookLoader from "./BookLoader";
+import { Divider } from "antd";
+
+import "./detailBook.scss";
 
 const DetailBook = () => {
   const location = useLocation();
@@ -82,105 +86,82 @@ const DetailBook = () => {
     );
   };
 
-  const LeftSlide = ({ images }) => {
-    if (!images || images.length === 0) return null;
-
-    return (
-      <div className="left-slide">
-        <ImageGallery
-          items={images}
-          showFullscreenButton={false}
-          showPlayButton={false}
-          showNav={true}
-          slideOnThumbnailOver={true}
-        />
-      </div>
-    );
-  };
-
   return (
     <>
-      <div
-        className="view-detail-page"
-        style={{ padding: "20px", minHeight: "100vh" }}
-      >
-        <Breadcrumb>
-          <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
-            Trang chủ
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active>Chi tiết sách</Breadcrumb.Item>
-        </Breadcrumb>
+      <div className="detail">
+        <Breadcrumb
+          separator=">"
+          items={[
+            {
+              title: (
+                <a style={{ textDecoration: "none" }} href="/">
+                  Trang chủ
+                </a>
+              ),
+            },
+            {
+              title: (
+                <a style={{ textDecoration: "none", color: "blue" }} href="#">
+                  Chi tiết sách
+                </a>
+              ),
+            },
+          ]}
+        />
 
-        <Row
-          className="mt-3"
-          style={{ background: "#fff", padding: "20px", borderRadius: "8px" }}
-        >
-          {/* Cột trái - ảnh sách */}
-          <Col md={5} sm={12}>
-            <LeftSlide images={galleryImages} />
-          </Col>
+        <Divider />
 
-          {/* Cột phải - thông tin sách */}
-          <Col md={7} sm={12}>
-            {dataBook && (
-              <div className="right-slide">
+        <div className="detail-book">
+          {dataBook && dataBook._id ? (
+            <>
+              <div className="detail-book__img">
+                <ImageGallery
+                  items={galleryImages}
+                  showFullscreenButton={false}
+                  showPlayButton={false}
+                  showNav={true} // vẫn giữ true nếu muốn dùng swipe hoặc keyboard
+                  slideOnThumbnailOver={true}
+                  renderLeftNav={() => <></>}
+                  renderRightNav={() => <></>}
+                />
+              </div>
+              <div className="detail-book_info">
                 <h4>{dataBook.mainText}</h4>
-                <div className="text-muted mb-2">
+                <div className="author">
                   Tác giả: <i>{dataBook.author}</i>
                 </div>
-                <h5 className="text-danger">
-                  {dataBook?.price} <small>đ</small>
+                <h5>
+                  {new Intl.NumberFormat("vi-VN").format(dataBook?.price || 0)}{" "}
+                  <small>đ</small>
                 </h5>
-                <div className="text-muted mb-3">Đã bán: {dataBook.sold}</div>
+                <div className="sold">Đã bán: {dataBook.sold}</div>
 
-                <div className="mb-3">
+                <div>
                   <h6>Vận chuyển: Miễn phí vận chuyển</h6>
-                  <span className="me-2">Số lượng:</span>
-                  <InputGroup className="mt-2" style={{ width: "150px" }}>
-                    <Button variant="outline-secondary" onClick={handleMinus}>
-                      -
-                    </Button>
-                    <Form.Control
+                  <div className="count">
+                    <span className="quantity">Số lượng:</span>
+                    <button onClick={handleMinus}>-</button>
+                    <input
                       type="number"
                       value={quantity}
                       onChange={handleChange}
                     />
-                    <Button variant="outline-secondary" onClick={handlePlus}>
-                      +
-                    </Button>
-                  </InputGroup>
+                    <button onClick={handlePlus}>+</button>
+                  </div>
                 </div>
 
-                <div className="d-flex gap-2 mt-3">
-                  <Button
-                    variant="outline-primary"
-                    className="flex-grow-1 d-flex align-items-center justify-content-center"
-                    style={{
-                      borderColor: "#1ba9ff",
-                      color: "#1ba9ff",
-                      backgroundColor: "transparent",
-                    }}
-                    onClick={handleAddToCart}
-                  >
-                    <BsCartPlus style={{ marginRight: "5px" }} />
+                <div>
+                  <button className="addToCart" onClick={handleAddToCart}>
+                    <BsCartPlus />
                     Thêm vào giỏ hàng
-                  </Button>
-                  <Button
-                    className="flex-grow-1 d-flex align-items-center justify-content-center"
-                    style={{
-                      backgroundColor: "#1ba9ff",
-                      borderColor: "#1ba9ff",
-                      color: "white",
-                    }}
-                  >
-                    <FaMoneyCheckAlt style={{ marginRight: "5px" }} />
-                    Mua ngay
-                  </Button>
+                  </button>
                 </div>
-              </div>
-            )}
-          </Col>
-        </Row>
+              </div>{" "}
+            </>
+          ) : (
+            <BookLoader />
+          )}
+        </div>
       </div>
     </>
   );

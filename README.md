@@ -88,11 +88,20 @@ src/
 │   ├── login/
 │   └── register/
 ├── redux/
+│   ├── account/
+│   ├── counter/
+│   ├── order/
+│   └── store.js
 ├── services/
+│   └── api.js
 ├── styles/
+│   └── Counter.module.css
 ├── utils/
+│   ├── axios-customize.js
+│   └── constant.js
 ├── App.jsx
 └── main.jsx
+```
 
 ## 🔒 Security
 
@@ -137,4 +146,7 @@ This project helped reinforce the following:
 ## 💬 Feedback
 
 This project is open for feedback and improvements. Contributions or suggestions are welcome through GitHub issues or pull requests.
+
+```
+
 ```
