@@ -52,3 +52,33 @@
     }
   }
 }
+
+@media (max-width: 370px) {
+  .step-progress {
+    gap: 0; // giảm khoảng cách giữa các bước
+
+    .step-item {
+      flex: 1;
+      min-width: 0;
+
+      .label {
+        font-size: 11px;
+        max-width: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+      }
+
+      .circle {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+      }
+
+      .line {
+        margin: 0 4px;
+      }
+    }
+  }
+}
