@@ -41,31 +41,50 @@ const BookTable = () => {
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const [dataUpdate, setDataUpdate] = useState();
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1100);
+    };
+
+    handleResize(); // gọi 1 lần khi load
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const columns = [
-    {
-      title: "ID",
-      dataIndex: "_id",
-      key: "name",
-      render: (text, record, index) => {
-        return (
-          <a
-            href="#"
-            onClick={() => {
-              setDataViewDetail(record), setOpenViewDetail(true);
-            }}
-          >
-            {record._id}
-          </a>
-        );
-      },
-    },
     {
       title: "Tên sách",
       dataIndex: "mainText",
+      width: 220,
+      ellipsis: true,
+      render: (text, record) => (
+        <a
+          href="#"
+          style={{
+            color: "#4096ff",
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "inline-block",
+            maxWidth: "100%",
+          }}
+          onClick={() => {
+            setDataViewDetail(record);
+            setOpenViewDetail(true);
+          }}
+        >
+          {text}
+        </a>
+      ),
     },
     {
       title: "Thể loại",
       dataIndex: "category",
+      width: 140,
+      ellipsis: true,
       render: (text) => (
         <span style={{ color: "#555", fontStyle: "italic" }}>{text}</span>
       ),
@@ -73,19 +92,23 @@ const BookTable = () => {
     {
       title: "Tác giả",
       dataIndex: "author",
+      width: 160,
+      ellipsis: true,
     },
     {
       title: "Giá (VNĐ)",
       dataIndex: "price",
+      width: 130,
+      align: "right",
+      ellipsis: true,
       render: (price) => `${price.toLocaleString()} VNĐ`,
       sorter: (a, b) => a.price - b.price,
     },
     {
-      title: "Ngày cập nhật",
-      dataIndex: "updatedAt",
-    },
-    {
       title: "Hành động",
+      width: 120,
+      align: "center",
+      // fixed: "right", // nếu scroll ngang cột hành động sẽ giữ nguyên
       render: (text, record) => (
         <>
           <Popconfirm
@@ -156,19 +179,14 @@ const BookTable = () => {
   };
 
   const renderHeader = () => (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <span>Danh sách sách</span>
-      <span style={{ display: "flex", gap: 15, alignItems: "center" }}>
+    <div className="header-table-container">
+      <h6>Danh sách sách</h6>
+      <div className="header-actions">
         <Button
           icon={<PlusOutlined />}
           type="primary"
           onClick={() => setOpenModalCreate(true)}
+          className="btn-add"
         >
           Thêm sách
         </Button>
@@ -179,42 +197,43 @@ const BookTable = () => {
             setCurrent(1);
             fetchBooks();
           }}
+          className="btn-reload"
         >
           <ReloadOutlined />
         </Button>
-      </span>
+      </div>
     </div>
   );
 
   return (
     <>
       <div className="search">
-        <div className="name">
+        <div className="book-name">
           <h6>Tên sách</h6>
           <Input
+            className="search-input"
             value={filters.title}
             placeholder="Nhập tên sách"
-            style={{ width: "300px" }}
             onChange={(e) => setFilters({ ...filters, title: e.target.value })}
           />
         </div>
 
-        <div className="name">
+        <div className="book-author">
           <h6>Tác giả</h6>
           <Input
+            className="search-input"
             value={filters.author}
             placeholder="Nhập tên tác giả"
-            style={{ width: "300px" }}
             onChange={(e) => setFilters({ ...filters, author: e.target.value })}
           />
         </div>
 
-        <div className="name">
+        <div className="book-type">
           <h6>Thể loại</h6>
           <Input
+            className="search-input"
             value={filters.category}
             placeholder="Nhập thể loại"
-            style={{ width: "300px" }}
             onChange={(e) =>
               setFilters({ ...filters, category: e.target.value })
             }
@@ -246,6 +265,7 @@ const BookTable = () => {
             columns={columns}
             dataSource={listBooks}
             rowKey="_id"
+            scroll={isMobile ? { x: "max-content" } : undefined} // 👈 chỉ scroll khi mobile
             pagination={{
               current,
               pageSize,

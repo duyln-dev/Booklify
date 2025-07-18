@@ -53,19 +53,19 @@ const MenuList = (props) => {
         {
           key: "manage-user",
           icon: <AppstoreOutlined />,
-          label: "Manage User",
-          children: [
-            {
-              key: "manage-user-crud",
-              icon: <EditOutlined />,
-              label: <Link to="/admin/user">CRUD</Link>,
-            },
-            {
-              key: "manage-user-file",
-              icon: <FileOutlined />,
-              label: <Link to="/admin/manage-user/file">File</Link>,
-            },
-          ],
+          label: <Link to="/admin/user">Manage Users</Link>,
+          // children: [
+          //   {
+          //     key: "manage-user-crud",
+          //     icon: <EditOutlined />,
+          //     label: <Link to="/admin/user">CRUD</Link>,
+          //   },
+          //   {
+          //     key: "manage-user-file",
+          //     icon: <FileOutlined />,
+          //     label: <Link to="/admin/manage-user/file">File</Link>,
+          //   },
+          // ],
         },
         {
           key: "manage-book",
@@ -183,6 +183,7 @@ const LayoutAdmin = () => {
                 icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               />
               <Dropdown
+                trigger={["hover", "click"]}
                 menu={{
                   items,
                   onClick: ({ key }) => {
